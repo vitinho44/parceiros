@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nossos Parceiros - WhatsApp</title>
+<style>
+  :root {
+    --bg: #f2f4f7;
+    --card-bg: #ffffff;
+    --text: #1a1a1a;
+    --muted: #6b7280;
+    --whatsapp: #25D366;
+    --whatsapp-dark: #1ebe57;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 24px 16px 60px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  header h1 {
+    font-size: 1.5rem;
+    margin: 0 0 6px;
+  }
+  header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .grid {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .info {
+    text-align: left;
+  }
+  .name {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 2px;
+  }
+  .numero {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  .whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--whatsapp);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 9px 16px;
+    border-radius: 999px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .card:hover .whatsapp-btn {
+    background: var(--whatsapp-dark);
+  }
+  .whatsapp-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: #fff;
+  }
+  footer {
+    text-align: center;
+    margin-top: 40px;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Nossos Parceiros</h1>
+  <p>Toque em um contato para falar direto no WhatsApp</p>
+</header>
+
+<div class="grid" id="grid"></div>
+
+<footer>Distribuidora Lopes</footer>
+
+<script>
+  const parceiros = [
+    { nome: "MJ Transportes", numeroExibicao: "92 99989-2036", numero: "5592999892036" },
+    { nome: "4 Irmãos - Materiais de Construção e Ferragens", numeroExibicao: "92 98138-6162", numero: "5592981386162" },
+    { nome: "Alarifo Transportes", numeroExibicao: "92 99132-8863", numero: "5592991328863" },
+    { nome: "Uchoa Distribuidora", numeroExibicao: "92 98146-9948", numero: "5592981469948" },
+    { nome: "Inovazon Tecnologia", numeroExibicao: "92 98146-2883", numero: "5592981462883" },
+    { nome: "JCP Construções", numeroExibicao: "92 99359-9280", numero: "5592993599280" },
+    { nome: "Easy Aluguel de Carros", numeroExibicao: "92 99212-3906", numero: "5592992123906" },
+    { nome: "Baiano Diesel", numeroExibicao: "92 98176-3210", numero: "5592981763210" },
+  ];
+
+  const grid = document.getElementById("grid");
+
+  parceiros.forEach(p => {
+    const card = document.createElement("a");
+    card.className = "card";
+    card.href = `https://wa.me/${p.numero}`;
+    card.target = "_blank";
+    card.rel = "noopener noreferrer";
+
+    const info = document.createElement("div");
+    info.className = "info";
+
+    const name = document.createElement("div");
+    name.className = "name";
+    name.textContent = p.nome;
+
+    const numero = document.createElement("div");
+    numero.className = "numero";
+    numero.textContent = p.numeroExibicao;
+
+    info.appendChild(name);
+    info.appendChild(numero);
+
+    const btn = document.createElement("span");
+    btn.className = "whatsapp-btn";
+    btn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.45 1.32 4.95L2 22l5.24-1.37a9.94 9.94 0 0 0 4.8 1.22h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2zm5.85 14.24c-.25.7-1.24 1.28-2.02 1.44-.55.11-1.26.2-3.67-.79-3.08-1.27-5.06-4.4-5.21-4.6-.15-.2-1.24-1.65-1.24-3.15s.78-2.23 1.06-2.53c.27-.3.6-.37.8-.37h.58c.19 0 .43-.07.68.52.25.6.86 2.08.94 2.23.08.15.13.32.03.52-.1.2-.15.32-.3.5-.15.18-.31.4-.44.53-.15.15-.3.31-.13.6.17.3.76 1.24 1.63 2.01 1.12.99 2.05 1.3 2.35 1.45.3.15.47.13.65-.08.18-.2.75-.87.95-1.17.2-.3.4-.25.66-.15.27.1 1.72.81 2.02.96.3.15.5.22.57.35.08.13.08.72-.17 1.42z"/></svg> WhatsApp`;
+
+    card.appendChild(info);
+    card.appendChild(btn);
+    grid.appendChild(card);
+  });
+</script>
+
+</body>
+</html>
